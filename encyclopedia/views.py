@@ -44,18 +44,18 @@ def new_entry(request):
             title = form.cleaned_data["title"]
             body = form.cleaned_data["body"]
 
-            print(title + ".md")
-            print(util.list_entries())
+            #print(title + ".md")
+            #print(util.list_entries())
 
             if('/' in title or '.' in title or '\\' in title):
-                print("you broke it")
+                #print("you broke it")
                 return render(request, "encyclopedia/new_entry.html", {
                 "form": NewEntryForm,
                 "error_text": "Invalid characters in title."
             })
 
             elif(title in util.list_entries()):
-                print("2you broke it")
+                #print("2you broke it")
                 return render(request, "encyclopedia/new_entry.html", {
                 "form": NewEntryForm,
                 "error_text": "Page with that title already exists."
@@ -84,17 +84,12 @@ def random_page(request):
     return redirect(f"/wiki/{rand_entry}/")
 
 def search(request):
-    print("in request")
     if request.method == 'GET':
         try:
-            print("trying")
             search_val = request.GET['q']
-            print("set search_val to request q val")
-            print(f"Printing search_val {request.GET['q']}")
 
             if(request.GET['q'] in util.list_entries()):
                 return redirect(f"/wiki/{request.GET['q']}")
-                print("in 1 if")
             #Pass results list to html django search template for formatting
             results = []
             for i in util.list_entries():
@@ -104,11 +99,8 @@ def search(request):
                 "results": results,
                 "title": search_val
             })
-            print(results)
-
 
         except Exception as error:
-            print(f"excepting because: {error}")
             return render(request, "encyclopedia/search.html")
 
         return render(request, "encyclopedia/search.html")
@@ -121,17 +113,15 @@ def edit_entry(request, entry_name):
         else:
             #form = EditEntryForm(request.POST, {"body": util.get_entry(entry_name)})
             eform = EditEntryForm({"body": util.get_entry(entry_name)})
-            print(util.get_entry(entry_name))
+            
             return render(request, "encyclopedia/edit_entry.html", {
                 "entry_name": entry_name,
                 "form": eform,
             })
     elif request.method == 'POST':
-        print("in post")
+        
         eform = EditEntryForm(request.POST)
-        print("parsing form")
-        print(eform.errors)
-        print(eform)
+        
         if eform.is_valid():
 
             body = eform.cleaned_data["body"]
