@@ -1,0 +1,9 @@
+##asdfsdaf##
+''_fs**d**_afs*ad''*
+***sadf***
++fasd+
+=afds=
+{safd}
+(fads)
+$adfs$
+@asdf@

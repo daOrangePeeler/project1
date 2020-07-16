@@ -1,0 +1,14 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block body %}
+    {{ body |safe }}
+    <div class="p-3 mb-2" style="background-color:#f0f0f0">
+        <a href="edit" style="color:#242424">Edit this Page</a>
+    </div>
+
+
+{% endblock body %}
